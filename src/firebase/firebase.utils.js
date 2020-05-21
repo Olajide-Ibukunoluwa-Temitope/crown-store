@@ -41,9 +41,12 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 firebase.initializeApp(fbConfig);
 
+// firebase authentication
 export const auth = firebase.auth();
+// firebasse firestore
 export const firestore = firebase.firestore();
 
+// sign in with google
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
