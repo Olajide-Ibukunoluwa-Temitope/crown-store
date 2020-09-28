@@ -13,6 +13,8 @@ const fbConfig = {
   appId: "1:943160265157:web:00d7c08f9f7f97109663ac"
 };
 
+firebase.initializeApp(fbConfig);
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
@@ -39,7 +41,35 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 }
 
-firebase.initializeApp(fbConfig);
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+  objectsToAdd.forEach(obj => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit()
+};
+
+export const convertCollectionSnapshotToMap = (collections) => {
+  const transformedcollection = collections.docs.map(doc => {
+    const { title, items } = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items
+    }
+  });
+  
+  return transformedcollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {})
+}
 
 // firebase authentication
 export const auth = firebase.auth();
