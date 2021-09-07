@@ -1,12 +1,15 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 import HomePage from './pages/homepage/homepage.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import ShopPage from './pages/shop/shop.component';import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
-import Header from './components/header/header.component';
+// import Header from './components/header/header.component';
+import Footer from './components/footer/footer.component';
 
 import { auth, createUserProfileDocument} from './firebase/firebase.utils';
 import { connect } from 'react-redux';
@@ -41,26 +44,26 @@ class App extends React.Component {
   }
 
   render(){
+    
     const { currentUser } = this.props
     return (
       <div>
-        <Header />
+        {/* <Header isBannerlessPage={this.state.isBannerlessPage} /> */}
+
         <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/shop' component={ShopPage} />
-          <Route exact path='/checkout' component={CheckoutPage} />
-          <Route 
-            exact 
-            path='/signin' 
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
+          <Route
+            exact
+            path="/signin"
             render={() =>
-              currentUser ? (
-                <Redirect to='/' />
-              ) : (
-                <SignInAndSignUpPage />
-              ) 
-            } 
+              currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
+            }
           />
         </Switch>
+
+        <Footer />
       </div>
     );
   }

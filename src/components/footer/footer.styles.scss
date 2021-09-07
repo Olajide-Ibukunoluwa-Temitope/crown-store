@@ -1,0 +1,43 @@
+.footer-container{
+  background-color: rgb(56, 56, 56);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 5rem;
+  margin-top: 4rem;
+
+  #footer-brand-section{
+    margin-right: 6rem;
+  }
+
+  .footer-section{
+    display: flex;
+    flex-direction: column;
+    width: 33.333%;
+
+    .brand{
+      font-size: 4.5rem;
+      margin-top: -1.5rem;
+    }
+
+    .footer-section-title{
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .footer-subsection{
+      display: flex;
+      flex-direction: column;
+
+      a{
+        color: inherit;
+        text-decoration: none;
+      }
+
+      p{
+        cursor: pointer;
+      }
+    }
+  }
+}

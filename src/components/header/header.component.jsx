@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './header.styles.scss';
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 import { Link } from 'react-router-dom';
@@ -11,33 +11,61 @@ import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 
+const Header = ({ currentUser, isHidden, isBannerlessPage }) => {
+  const [shadowMenu, setShadowMenu] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const windowTopPosition = 100;
 
-const Header = ({ currentUser, isHidden }) => (
-  <div className='header'>
-    <Link to="/" className='logo-container'>
-      <Logo className='logo' />
-    </Link>
-    <div className="options">
-      <Link className='option' to='/shop'>
-        SHOP
+  useEffect(() => {
+    // const te = false;
+    const onScroll = () => {
+      let currentPosition = window.document.documentElement.scrollTop; // or use document.documentElement.scrollTop;
+      if (currentPosition >= windowTopPosition) {
+        // downscroll code
+        setShadowMenu(true);
+      } else {
+        // upscroll code
+        setShadowMenu(false);
+      }
+      setScrollPosition(currentPosition <= 0 ? 0 : currentPosition);
+    };
+    // onScroll();
+
+    if (isBannerlessPage) {
+      setShadowMenu(true);
+    } else {
+      window.addEventListener("scroll", onScroll);
+    }
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [scrollPosition, isBannerlessPage]);
+
+  return (
+    <div className={`header ${shadowMenu ? "shadowNavbar" : ""}`}>
+      <Link to="/" className="logo-container">
+        <Logo className="logo" />
       </Link>
-      <Link className='option' to='/shop'>
-        CONTACT
-      </Link>
-      {
-        currentUser ? (
-          <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>
+      <div className="options">
+        <Link className="option" to="/shop">
+          SHOP
+        </Link>
+        {/* <Link className="option" to="/shop">
+          CONTACT
+        </Link> */}
+        {currentUser ? (
+          <div className="option" onClick={() => auth.signOut()}>
+            SIGN OUT
+          </div>
         ) : (
-          <Link className='option' to='/signin'>
+          <Link className="option" to="/signin">
             SIGN IN
           </Link>
-        )
-      }
-      <CartIcon />
+        )}
+        <CartIcon isWhiteBg={shadowMenu} />
+      </div>
+      {isHidden ? null : <CartDropDown />}
     </div>
-    {isHidden ? null : <CartDropDown />}
-  </div>
-);
+  );
+};
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
