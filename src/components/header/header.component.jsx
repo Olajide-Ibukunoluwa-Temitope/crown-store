@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './header.styles.scss';
 import { ReactComponent as Logo } from '../../assets/crown.svg'
+import { ReactComponent as Menu } from "../../assets/menu_icon.svg";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { auth } from '../../firebase/firebase.utils';
@@ -14,7 +15,12 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 const Header = ({ currentUser, isHidden, isBannerlessPage }) => {
   const [shadowMenu, setShadowMenu] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [openMenu, setOpenMenu] = useState(false);
   const windowTopPosition = 100;
+
+  const toggleMenu = () => {
+    setOpenMenu(!openMenu)
+  }
 
   useEffect(() => {
     // const te = false;
@@ -40,29 +46,72 @@ const Header = ({ currentUser, isHidden, isBannerlessPage }) => {
   }, [scrollPosition, isBannerlessPage]);
 
   return (
-    <div className={`header ${shadowMenu ? "shadowNavbar" : ""}`}>
-      <Link to="/" className="logo-container">
-        <Logo className="logo" />
-      </Link>
-      <div className="options">
-        <Link className="option" to="/shop">
-          SHOP
+    <div>
+      <div className={`header ${shadowMenu ? "shadowNavbar" : ""}`}>
+        <Link to="/" className="logo-container">
+          <Logo className="logo" />
         </Link>
-        {/* <Link className="option" to="/shop">
-          CONTACT
-        </Link> */}
-        {currentUser ? (
-          <div className="option" onClick={() => auth.signOut()}>
-            SIGN OUT
-          </div>
-        ) : (
-          <Link className="option" to="/signin">
-            SIGN IN
+        <div className="options">
+          <Link className="option" to="/shop">
+            SHOP
           </Link>
-        )}
-        <CartIcon isWhiteBg={shadowMenu} />
+          {currentUser ? (
+            <div className="option" onClick={() => auth.signOut()}>
+              SIGN OUT
+            </div>
+          ) : (
+            <Link className="option" to="/signin">
+              SIGN IN
+            </Link>
+          )}
+          <CartIcon isWhiteBg={shadowMenu} />
+        </div>
+        {isHidden ? null : <CartDropDown />}
       </div>
-      {isHidden ? null : <CartDropDown />}
+      {/* mobile header */}
+      <div className={`mobile-header-container`}>
+        <div className={"mobile-nav"}>
+          <Link to="/" className="logo-container">
+            <Logo className="logo" />
+          </Link>
+          <div onClick={toggleMenu}>
+            <Menu className="menu" />
+          </div>
+        </div>
+        <div className={`${openMenu ? "options" : "close-menu"}`}>
+          <Link
+            className="option"
+            to="/shop"
+            onClick={() => setOpenMenu(false)}
+          >
+            SHOP
+          </Link>
+          {currentUser ? (
+            <div 
+              className="option" 
+              onClick={() => {
+                auth.signOut()
+                setOpenMenu(false)
+              }
+            }>
+              SIGN OUT
+            </div>
+          ) : (
+            <Link
+              className="option"
+              to="/signin"
+              onClick={() => setOpenMenu(false)}
+            >
+              SIGN IN
+            </Link>
+          )}
+          {/* <CartIcon isWhiteBg={shadowMenu} /> */}
+          <Link className="option" to="/checkout">
+            CHECKOUT
+          </Link>
+        </div>
+        {/* {isHidden ? null : <CartDropDown />} */}
+      </div>
     </div>
   );
 };

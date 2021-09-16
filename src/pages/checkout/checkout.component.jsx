@@ -10,7 +10,7 @@ import Header from '../../components/header/header.component';
 const CheckoutPage = ({cartItems, total}) => (
   <div>
     <Header isBannerlessPage={true} />
-    <div  className="checkout-page">
+    <div className="checkout-page">
       <div className="checkout-header">
         <div className="header-block">
           <span>Product</span>

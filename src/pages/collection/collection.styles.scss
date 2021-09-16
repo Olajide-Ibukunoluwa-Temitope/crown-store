@@ -12,8 +12,23 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 10px;
 
-    & .collection-item {
+    .collection-item {
       margin-bottom: 30px;
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .collection-page {
+
+    .title {
+      margin-top: 3rem;
+    }
+
+    .items {
+      display: flex;
+      flex-direction: column;
+      
     }
   }
 }

@@ -1,5 +1,5 @@
 .sign-in-and-sign-up {
-  width : 850px;
+  width: 70%;
   margin: auto;
 
   .sign-in-and-sign-up-container{
@@ -7,5 +7,16 @@
     width: 100%;
     justify-content: space-between;
     padding-top: 8rem;
+  }
+}
+
+@media only screen and (max-width: 900px){
+  .sign-in-and-sign-up {
+    width: 100%;
+    padding: 3rem 2rem;
+
+    .sign-in-and-sign-up-container{
+      flex-direction: column;
+    }
   }
 }

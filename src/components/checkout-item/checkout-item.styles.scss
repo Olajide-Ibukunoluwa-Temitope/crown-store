@@ -39,3 +39,15 @@
     cursor: pointer;
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .checkout-item {
+
+    .name,
+    .quantity,
+    .price {
+      width: 23%;
+      word-wrap: break-word;
+    }
+  }
+}

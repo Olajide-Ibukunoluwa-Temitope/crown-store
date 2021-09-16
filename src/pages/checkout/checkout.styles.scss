@@ -1,5 +1,5 @@
 .checkout-page {
-  width: 55%;
+  width: 70%;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
@@ -21,6 +21,10 @@
       &:last-child {
         width: 8%;
       }
+
+      span {
+        word-wrap: break-word;
+      }
     }
   }
 
@@ -40,5 +44,24 @@
     margin-top: 40px;
     font-size: 24px;
     color: red;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .checkout-page {
+    width: 100%;
+    padding: 8rem 1rem 0;
+
+    .checkout-header {
+
+      .header-block {
+        text-transform: capitalize;
+        width: 20%;
+
+        &:last-child {
+          visibility: hidden;
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,32 @@
+.carousel-caption-container{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  left: 10%;
+
+  .carousel-caption-section{
+    text-align: left;
+    font-size: 4rem;
+  }
+}
+
+
+
+@media only screen and (max-width: 900px) {
+  .carousel-caption-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    left: 5%;
+    
+
+    .carousel-caption-section{
+      font-size: 3rem;
+      line-height: 1.5;
+    }
+  }
+  
+}

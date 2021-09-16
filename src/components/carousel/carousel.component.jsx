@@ -5,6 +5,7 @@ import Carousel from "react-bootstrap/Carousel";
 import slider2 from "../../assets/slider2.jpg";
 import slider4 from "../../assets/slider4.jpg";
 import slider5 from "../../assets/slider5.jpg";
+import './carousel.styles.scss';
 
 const CarouselSlider = ({carouselHeight}) => {
   const [index, setIndex] = useState(0);
@@ -41,13 +42,8 @@ const CarouselSlider = ({carouselHeight}) => {
               }}
             />
             <Carousel.Caption
-              style={{
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-                left: '10%',
-              }}
+              className='carousel-caption-container'
+              
             >
               <div
                 style={{
@@ -56,7 +52,7 @@ const CarouselSlider = ({carouselHeight}) => {
                   alignItems: "flex-start",
                 }}
               >
-                <h1 style={{textAlign: "left", fontSize: '4rem'}}>Shop with ease, Product Variety, <br/> Secure Payment</h1>
+                <h1 class='carousel-caption-section'>Shop with ease, Product Variety, <br/> Secure Payment</h1>
               </div>
             </Carousel.Caption>
           </Carousel.Item>

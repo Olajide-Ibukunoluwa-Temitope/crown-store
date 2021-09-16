@@ -44,3 +44,10 @@
     }
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .custom-button{
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+}

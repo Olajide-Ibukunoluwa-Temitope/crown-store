@@ -41,3 +41,23 @@
     }
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .footer-container{
+    flex-direction: column;
+    padding: 20px;
+
+    #footer-brand-section{
+      margin-bottom: 1.5rem;
+
+      .brand{
+        font-size: 3rem;
+        margin-top: 1.5rem
+      }
+    }
+
+    .footer-section{
+      width: 100%;
+    }
+  }
+}
